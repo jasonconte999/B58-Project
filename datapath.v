@@ -1,17 +1,14 @@
 module datapath(
-    input clk,
-    input resetn,
-    input [7:0] data_in,
-    input ld_alu_out, 
-    input ld_x, ld_a, ld_b, ld_c,
-    input ld_r,
-    input alu_op, 
-    input [1:0] alu_select,
-    output reg [7:0] data_result
+	input clk,
+	input [1:0] alu_select,
+	output x_out;
+	output y_out;
+	output colour_out;
+	output score_out;
     );
     
-    // input registers
-    reg [7:0] wall_x, bird_vy, bird_y;
+    // registers
+    reg [7:0] wall_x, bird_vy, bird_y, score;
 
     // output of the alu
     reg [7:0] alu_out;
@@ -22,9 +19,14 @@ module datapath(
     localparam BIRD_VY_START = 8'b00000000; //Bird's vertical speed starts at 0
     localparam BIRD_VY_SPEED = 8'b00000100; //Bird's vertical speed decreases by speed 4
     localparam BIRD_VY_JUMP = 8'b00001010; //When bird jumps, velocity becomes 10
+    localparam BIRD_COLOUR = 3'b010;
     localparam WALL_X_START = 8'b01100100; //Wall starts at x=100
     localparam WALL_X_SPEED = 8'b00000100; //Wall moves at speed 4
     localparam WALL_WIDTH = 8'b0000001010; //Wall is 10 pixels thick
+    localparam WALL_COLOUR = 3'b100;
+    localparam BACKGROUND_COLOUR = 3'b111;
+
+    localparam alu_op = 1'b0;
     
     // Reset registers if necessary
     always@(posedge clk) begin
@@ -32,6 +34,7 @@ module datapath(
             wall_x <= WALL_X_START; 
             bird_vy <= BIRD_VY_START; 
             bird_y <= BIRD_Y_START;
+	    score <= 8'b00000000;
         end
     end
 
