@@ -4,9 +4,9 @@ module control_wall(start, touched, clk, resetn);
     input clk;
     input resetn;
     
-    reg [1:0] current, next;
+    localparam W_READY = 2'b00, W_MOVE = 2'b01; W_STOP = 2'b11;    reg [1:0] current, next;
     
-    localparam W_READY = 2'b00, W_MOVE = 2'b01; W_STOP = 2'b11;
+    localparam W_READY = 2'b00, W_MOVE = 2'b01, W_STOP = 2'b11;
     //state table for wall
     always@(*)
     begin: state_table
@@ -18,7 +18,7 @@ module control_wall(start, touched, clk, resetn);
         endcase
     end
     //state register
-    always@(posedge clk)
+    always@(posedge clk)    localparam W_READY = 2'b00, W_MOVE = 2'b01; W_STOP = 2'b11;
     begin: state_FFS
         if (!resetn)
             current <= W_READY;
