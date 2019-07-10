@@ -1,4 +1,4 @@
-module control_bird(clk, resetn, start, press_key, touched;
+module control_bird(clk, resetn, press_key, touched);
         input clk;
         input resetn;
         input press_key;
@@ -24,7 +24,7 @@ module control_bird(clk, resetn, start, press_key, touched;
                                 else next  = press_key ? B_RAISING : B_FALLING;
                         end
                         B_STOP: next = B_READY;
-                        default next = B_READY
+                        default next = B_READY;
                 endcase
         end
         
@@ -32,7 +32,7 @@ module control_bird(clk, resetn, start, press_key, touched;
         always@(posedge clk)
         begin: state_FFS
                 if (!resetn)
-                        current <= S_READY;
+                        current <= B_READY;
                 else
                         current <= next;
         end
