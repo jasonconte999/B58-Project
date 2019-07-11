@@ -1,10 +1,4 @@
-module datapath_wall(
-	input clk,
-	input [1:0] alu_select,
-	output x_out;
-	output y_out;
-	output colour_out;
-    );
+module datapath_wall(input clk, input [1:0] alu_select, output x_out, output y_out, output colour_out);
     
    // registers
 	reg [7:0] wall_x;
@@ -27,14 +21,18 @@ module datapath_wall(
     begin
         case (cur_state)
 				DEL_WALL:
-						//draw black rectangle at current position of wall
+						begin
+							//draw black rectangle at current position of wall
+						end
 				UPDATE_WALL:
 						begin
 							wall_x <= wall_x - WALL_X_SPEED;
 						end
 				DRAW_WALL:
-						//draw wall at new UPDATED POSITION
-        endcase
+						begin
+							//draw wall at new UPDATED POSITION
+						end
+		  endcase
     end
     
 endmodule
