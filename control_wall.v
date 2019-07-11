@@ -6,7 +6,7 @@ module control_wall(go, touched, clk, resetn, start, move);
     output reg start;
     output reg move;
     
-    localparam W_READY = 2'b00, W_MOVE = 2'b01; W_STOP = 2'b11;    
+    localparam W_READY = 2'b00, W_MOVE = 2'b01, W_STOP = 2'b11;    
     reg [1:0] current, next;
 
     //state table for wall
