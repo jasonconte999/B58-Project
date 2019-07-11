@@ -80,17 +80,12 @@ Weekly Reports
 --------------
 <In this space, provide a report each week of what worked and what didn't, and what (if any) changes were made to your proposal)>
 
-
-
-
-[This is an example of a report where things didn't go so well.]
-Week 1: 
-        We added and tested the sensors and the main FSM. 
-        The distance sensor we had intended to use didn't work as expected (wasn't precise enough at further distances, only seems to work accurately within 5-10cm), so instead we've decided to change the project to use a light sensor instead.
-        Had trouble getting the FSM to work (kept getting stuck in state 101, took longer to debug than expected), so we may not be able to add the high score feature. We have updated that in the project description as an optional feature.
-
-
-
+Week 1:
+        Our initial goals didn't account for how our modules were to be structured. Tasks were split into more logical modules and reassigned.
+        Yatzu:
+        Yifei:
+        Adil:
+        Jason: draw_rect (fully tested), datapath_bird (partially designed)
 
 
 
