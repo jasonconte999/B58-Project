@@ -1,5 +1,5 @@
 Control_bird: Tested
-Control_wall: Designed
+Control_wall: Tested
 Datapath: Adil, In progress
   -calls datapath_bird, datapath_wall, draw_rect, check_touched
   -outputs to flappy_hawk
