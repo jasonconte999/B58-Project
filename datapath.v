@@ -9,11 +9,7 @@ module datapath(
     
     // registers
     reg [7:0] wall_x, bird_vy, bird_y, score;
-
-    // output of the alu
-    reg [7:0] alu_out;
-    // alu input muxes
-    reg [7:0] alu_a, alu_b;
+	reg [7:0] draw_x, draw_y;
 
     localparam BIRD_Y_START = 8'b00111100; //Bird starts at y=60
     localparam BIRD_VY_START = 8'b00000000; //Bird's vertical speed starts at 0
@@ -25,59 +21,23 @@ module datapath(
     localparam WALL_WIDTH = 8'b0000001010; //Wall is 10 pixels thick
     localparam WALL_COLOUR = 3'b100;
     localparam BACKGROUND_COLOUR = 3'b111;
+	
+	localparam UPDATE_WALL = 6'd0,
+		UPDATE_BIRD_Y = 6'd1,
+		UPDATE_BIRD_VY = 6'd2,
+		DEL_WALL = 6'd3,
+		DEL_BIRD = 6'd4,
+		DRAW_WALL = 6'd5,
+		DRAW_BIRD = 6'd6;
 
-    localparam alu_op = 1'b0;
-    
-    // Reset registers if necessary
-    always@(posedge clk) begin
-        if(!resetn) begin
-            wall_x <= WALL_X_START; 
-            bird_vy <= BIRD_VY_START; 
-            bird_y <= BIRD_Y_START;
-	    score <= 8'b00000000;
-        end
-    end
-
-    // The ALU input multiplexers
+    // State mapping
     always @(*)
     begin
-        case (alu_select)
-            2'd0:
-                alu_a = wall_x;
-		alu_b = WALL_X_SPEED;
-            2'd1:
-                alu_a = bird_vy;
-		alu_b = BIRD_VY_SPEED;
-            2'd2:
-                alu_a = bird_y;
-		alu_b = bird_vy;
-            default: alu_a = 8'b0;
-        endcase
-    end
-
-    // The ALU 
-    always @(*)
-    begin : ALU
-        // alu
-        case (alu_op)
-            0: begin
-                   alu_out = alu_a - alu_b; //performs subtraction
-               end
-            default: alu_out = 8'b0;
-        endcase
-    end
-
-    // The ALU output multiplexers
-    always @(*)
-    begin
-        case (alu_select)
-            2'd0:
-                wall_x = alu_out;
-            2'd1:
-                bird_vy = alu_out;
-            2'd2:
-                bird_y = alu_out;
-            default: alu_a = 8'b0;
+        case (cur_state)
+            UPDATE_WALL:
+				begin
+					wall_x <= wall_x - WALL_X_SPEED;
+				end
         endcase
     end
     
