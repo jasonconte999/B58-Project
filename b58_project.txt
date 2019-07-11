@@ -82,8 +82,7 @@ Weekly Reports
 
 Week 1:
         Our initial goals didn't account for how our modules were to be structured. Tasks were split into more logical modules and reassigned.
-        Yatzu:
-        Yifei:
+        Yatzu, Yifei: created and tested control_bird, control_wall, and check_touched
         Adil:
         Jason: draw_rect (fully tested), datapath_bird (partially designed)
 
