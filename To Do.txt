@@ -1,11 +1,10 @@
-Control_bird: Tested
-Control_wall: Tested
-Datapath: Adil, In progress
-  -calls datapath_bird, datapath_wall, draw_rect, check_touched
-  -outputs to flappy_hawk
-Datapath_bird: Jason, In progress
-Datapath_wall: Adil, In progress
-Check_touched: Yifei, In progress
-Draw_rect: Jason, Tested
-Flappy_Hawk:
-Random_gen:
+Finished
+  Control_bird 
+  Control_wall
+  Draw_rect (Jason)
+
+Adil: Datapath_bird, Datapath_wall
+Jason: Datapath
+Yifei: check_touched
+Yatzu: Random_gen
+Yifei/Yatzu: Flappy_Hawk
