@@ -17,6 +17,17 @@ module control_wall(start, touched, clk, resetn);
             default next = W_READY;
         endcase
     end
+    //enable signals
+    always@(*)
+        begin: enable_signals
+            start = 1'b0;
+            move = 1'b0;
+            case(current)
+                W_READY: start = 1'b1;
+                W_MOVE: move = 1'b1;
+            endcase
+        end
+    
     //state register
     always@(posedge clk)    localparam W_READY = 2'b00, W_MOVE = 2'b01; W_STOP = 2'b11;
     begin: state_FFS
