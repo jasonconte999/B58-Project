@@ -9,6 +9,9 @@ module check_touched(
 	input wall_bottomy;
 	output touched;
 );
-	assign touched = bird_xright >= wall_xleft | bird_xleft <= wall_xright;
+	if (bird_xright >= wall_xleft | bird_xleft <= wall_xright) begin 
+		assign touched  = bird_ytop <= wall_topy | bird_ybottom >= wall_bottomy;
+	end
+	else asign touched = 1'b0;
 endmodule
 			
