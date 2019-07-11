@@ -6,8 +6,10 @@ module datapath_wall(input clk, input [1:0] alu_select, output x_out, output y_o
 
 	localparam WALL_X_START = 8'b01100100; //Wall starts at x=100
 	localparam WALL_X_SPEED = 8'b00000100; //Wall moves at speed 4
+	localparam WALL_Y = 8'b00000000;
 	localparam WALL_WIDTH = 8'b00001010; //Wall is 10 pixels thick
 	localparam WALL_COLOUR = 3'b100;
+	localparam WALL_HEIGHT = 8'b01111000;
 	localparam HOLE_HEIGHT = 8'b00110010; //Hole is 50 pixels high
 	localparam BACKGROUND_COLOUR = 3'b111;
 	
@@ -23,6 +25,16 @@ module datapath_wall(input clk, input [1:0] alu_select, output x_out, output y_o
 				DEL_WALL:
 						begin
 							//draw black rectangle at current position of wall
+							draw_rect(
+								.start_x(wall_x),
+								.start_y(WALL_Y),
+								.width(WALL_WIDTH),
+								.height(WALL_HEIGHT),
+								.clk(clk),
+								.x_out(),
+								.y_out(),
+								.finished_draw()
+							);
 						end
 				UPDATE_WALL:
 						begin
@@ -30,7 +42,17 @@ module datapath_wall(input clk, input [1:0] alu_select, output x_out, output y_o
 						end
 				DRAW_WALL:
 						begin
-							//draw wall at new UPDATED POSITION
+							//draw wall at new updated position
+							draw_rect(
+								.start_x(wall_x),
+								.start_y(WALL_Y),
+								.width(WALL_WIDTH),
+								.height(WALL_HEIGHT),
+								.clk(clk),
+								.x_out(),
+								.y_out(),
+								.finished_draw()
+							);
 						end
 		  endcase
     end
