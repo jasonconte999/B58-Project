@@ -8,3 +8,4 @@ Datapath_wall: Adil, In progress
 Check_touched: Yifei, In progress
 Draw_rect: Jason, Tested
 Flappy_Hawk:
+Random_gen:
