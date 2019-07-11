@@ -1,0 +1,8 @@
+Control_bird: Tested
+Control_wall: Designed
+Datapath:
+Datapath_bird: Jason, In progress
+Datapath_wall: Adil, In progress
+Check_touched: Yifei, In progress
+Draw_rect: Jason, Designed
+Flappy_Hawk:
