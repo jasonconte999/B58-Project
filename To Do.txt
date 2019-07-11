@@ -1,10 +1,10 @@
 Control_bird: Tested
 Control_wall: Designed
-Datapath:
+Datapath: Adil, In progress
   -calls datapath_bird, datapath_wall, draw_rect, check_touched
   -outputs to flappy_hawk
 Datapath_bird: Jason, In progress
 Datapath_wall: Adil, In progress
 Check_touched: Yifei, In progress
-Draw_rect: Jason, Designed
+Draw_rect: Jason, Tested
 Flappy_Hawk:
