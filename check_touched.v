@@ -9,16 +9,8 @@ module check_touched(
 	input wall_xrigth;
 	input wall_topy;
 	input wall_bottomy;
-	output reg touched;
+	output touched;
 );
-	always@(*)
-	begin:
-		if(bird_xright >= wall_xleft | bird_xleft <= wall_xright)begin
-			touched <= 1'b1;
-		end
-		else begin 
-			touched <= 1'b0;
-		end
-	end
+	assign touched = bird_xright >= wall_xleft | bird_xleft <= wall_xright;
 endmodule
 			
