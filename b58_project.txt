@@ -1,0 +1,111 @@
+﻿CSCB58 Project Report: Summer 2019
+
+
+Team Member A
+-------------
+First Name: Jason
+Last Name: Conte
+Student Number: 1004023380
+UofT E-mail Address: jason.conte@mail.utoronto.ca
+
+
+Team Member B
+-------------
+First Name: Ya-Tzu
+Last Name: Wang
+Student Number: 1003111759
+UofT E-mail Address: yatzu.wang@mail.utoronto.ca
+
+
+Team Member C (Optional)
+-------------
+First Name: Adil
+Last Name: Shah
+Student Number: 1004847151
+UofT E-mail Address: adilabbas.shah@mail.utoronto.ca
+
+
+Team Member D (Optional)
+-------------
+First Name: Yifei
+Last Name: Gao
+Student Number: 1004108262
+UofT E-mail Address: yiffy.gao@mail.utoronto.ca
+
+
+
+
+Project Plan
+--------
+
+
+Project Title: Jumpy Hawk
+
+
+
+
+Provide a one paragraph description of your project:
+Block flying in air that can jump at push of a button. Gravity affects it. Must go through holes randomly placed on successive, evenly spaced walls. Score is number of holes passed through, kept track on the HEX display. Game is displayed on VGA monitor.
+
+
+
+
+What is your plan for the first week?
+Jason: Have a gravity effect on the block
+Yatzu: FSM: Reset, Falling, Rising
+Adil, Yifei: Walls moving towards left side of screen
+
+
+What is your plan for the second week?
+Jason, Yatzu: Have a jump action for the block
+Adil, Yifei: Walls have 1 hole in them randomly placed in wallt
+
+
+What is your plan for the third week?
+Jason, Yatzu: Game stops when block collides with wall
+Adil, Yifei: Score increases when block passes through hole
+
+
+
+
+What is your backup plan if things don't work out as planned?
+Block Game. Coloured block only has vertical movement. Must pass through block of same colour in 4 block wall. Can change colour by passing coloured lines
+
+
+
+
+
+
+Weekly Reports
+--------------
+<In this space, provide a report each week of what worked and what didn't, and what (if any) changes were made to your proposal)>
+
+
+
+
+[This is an example of a report where things didn't go so well.]
+Week 1: 
+        We added and tested the sensors and the main FSM. 
+        The distance sensor we had intended to use didn't work as expected (wasn't precise enough at further distances, only seems to work accurately within 5-10cm), so instead we've decided to change the project to use a light sensor instead.
+        Had trouble getting the FSM to work (kept getting stuck in state 101, took longer to debug than expected), so we may not be able to add the high score feature. We have updated that in the project description as an optional feature.
+
+
+
+
+
+
+References
+----------
+<In this space clearly indicate all external sources used in this project. If you used anyone else's code (from previous B58 projects or other sources) clearly indicate what you used and where you found it. Usage of any material not credited in this space will be considered plagiarism. It is absolutely OK and expected to update this section as you progress in the projected.
+
+
+Make sure to document what you added on top of the existing work, especially if you work with a previous project. What is it that YOU added?>
+
+
+
+
+
+
+Repo & Video
+------------
+<At the end of the project, provide links to your code repository and presentation video (and passwords if not public), if you don't want us to publish this info on future course websites, just say so here>
