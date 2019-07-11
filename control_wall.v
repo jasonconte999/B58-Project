@@ -31,7 +31,7 @@ module control_wall(go, touched, clk, resetn, start, move);
         end
     
     //state register
-    always@(posedge clk)    localparam W_READY = 2'b00, W_MOVE = 2'b01; W_STOP = 2'b11;
+    always@(posedge clk)
     begin: state_FFS
         if (!resetn)
             current <= W_READY;
