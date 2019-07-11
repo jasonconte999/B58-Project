@@ -1,4 +1,4 @@
-module datapath(
+module datapath_wall(
 	input clk,
 	input [1:0] alu_select,
 	output x_out;
@@ -18,8 +18,9 @@ module datapath(
     localparam BACKGROUND_COLOUR = 3'b111;
 	
 	localparam UPDATE_WALL = 6'd0,
-		DEL_WALL = 6'd3,
-		DRAW_WALL = 6'd5,
+		DEL_WALL = 6'd1,
+		DRAW_WALL = 6'd2,
+		UPDATE_SCORE = 6'd3; 
 
     // State mapping
     always @(*)
