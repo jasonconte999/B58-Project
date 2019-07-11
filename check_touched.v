@@ -1,6 +1,4 @@
 module check_touched(
-	input clk,
-	input [1:0] alu_select,
 	input bird_xleft;
 	input bird_xright;
 	input bird_ytop;
