@@ -82,10 +82,19 @@ Weekly Reports
 
 Week 1:
         Our initial goals didn't account for how our modules were to be structured. Tasks were split into more logical modules and reassigned.
+        This week:
         Yatzu: tested contral_brid, control_wall
         Yifei: implemented control_bird(fully tested), control_wall(fully tested), and check_touched
         Adil: datapath_wall(design complete, almost done implementation)
         Jason: draw_rect (fully tested), datapath_bird (partially designed)
+        
+        Next week plan:
+        Yatzu: implement and test  random_gen, flappy_hawk
+        Yifei: test check_touched, implement and test flappy_hawk
+        Adil: implement and test datapath bird, datapath wall
+        Jason: implement and test the parent data path
+        
+        
 
 
 
