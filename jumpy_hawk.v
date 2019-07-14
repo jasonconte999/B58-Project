@@ -16,11 +16,11 @@ module fpga_top(
 	input CLOCK_50;
 	output [6:0] HEX0, HEX1;
 
-	output			VGA_CLK;   				//	VGA Clock
-	output			VGA_HS;					//	VGA H_SYNC
-	output			VGA_VS;					//	VGA V_SYNC
-	output			VGA_BLANK_N;				//	VGA BLANK
-	output			VGA_SYNC_N;				//	VGA SYNC
+	output VGA_CLK;   				//	VGA Clock
+	output VGA_HS;					//	VGA H_SYNC
+	output VGA_VS;					//	VGA V_SYNC
+	output VGA_BLANK_N;				//	VGA BLANK
+	output VGA_SYNC_N;				//	VGA SYNC
 	output	[9:0]	VGA_R;   				//	VGA Red[9:0]
 	output	[9:0]	VGA_G;	 				//	VGA Green[9:0]
 	output	[9:0]	VGA_B;   				//	VGA Blue[9:0]
