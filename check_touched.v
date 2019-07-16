@@ -11,7 +11,11 @@ module check_touched(
 );
 	wire in_the_hole;
 	wire touched_top_bottom;
-	assign in_the_hole = bird_xright >= wall_xleft | bird_xleft <= wall_xright;
-	assign touched_top_bottom  = bird_ytop <= wall_topy | bird_ybottom >= wall_bottomy;
-	assign touched = in_the_hole & touched_top_bottom;
+	//assign in_the_hole = bird_xright >= wall_xleft | bird_xleft <= wall_xright;
+	//assign touched_top_bottom  = bird_ytop <= wall_topy | bird_ybottom >= wall_bottomy;
+	//assign touched = in_the_hole & touched_top_bottom;
+	// | bit-wise or; || logical or; & bit-wise and; && logical and
+	assign in_the_hole = bird_xright >= wall_xleft || bird_xleft <= wall_xright;
+	assign touched_top_bottom  = bird_ytop <= wall_topy || bird_ybottom >= wall_bottomy;
+	assign touched = in_the_hole && touched_top_bottom;
 endmodule
