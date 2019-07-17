@@ -35,13 +35,15 @@ module fpga_top(
 	wire go;
 	wire clk;
 	wire [1:0] alu_select;
+	wire finished_draw, collision;
 
 	assign go = KEY[0];
 	assign clk = CLOCK_50;
 
 	control C0(
 		.clk(clk),
-		.go(go),
+		.finished_draw(finished_draw),
+		.collision(collision),
 		.alu_select(alu_select)
 	);
 
@@ -51,7 +53,9 @@ module fpga_top(
 		.x_out(x),
 		.y_out(y),
 		.colour_out(colour),
-		.score_out(score)
+		.score_out(score),
+		.finished_draw(finished_draw),
+		.collision(collision)
 	);
 
 	vga_adapter VGA(

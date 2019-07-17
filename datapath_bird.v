@@ -1,10 +1,7 @@
 module datapath_bird(
 	input clk,
-	input [1:0] alu_select,
-	output x_out;
-	output y_out;
-	output colour_out;
-	output score_out;
+	input [1:0] cur_state,
+	output y_out
     );
     
     // registers
@@ -15,7 +12,7 @@ module datapath_bird(
 	localparam BIRD_VY_START = 8'b00000000; //Bird's vertical speed starts at 0
 	localparam BIRD_VY_SPEED = 8'b00000100; //Bird's vertical speed decreases by speed 4
 	localparam BIRD_VY_JUMP = 8'b00001010; //When bird jumps, velocity becomes 10
-	localparam BIRD_COLOUR = 3'b010;
+	
 	localparam BACKGROUND_COLOUR = 3'b111;
 	localparam GRAVITY = 8'b0000001000;
 
@@ -35,7 +32,6 @@ module datapath_bird(
 			begin
 				bird_vy <= bird_vy - GRAVITY;
 			end
-		
         endcase
     end
     

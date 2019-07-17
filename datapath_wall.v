@@ -1,4 +1,4 @@
-module datapath_wall(input clk, input [1:0] alu_select, output x_out, output y_out, output colour_out);
+module datapath_wall(input clk, input [1:0] cur_state, output x_out, output y_out, output colour_out);
     
    // registers
 	reg [7:0] wall_x;
