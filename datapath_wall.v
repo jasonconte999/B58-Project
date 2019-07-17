@@ -14,9 +14,9 @@ module datapath_wall(input clk, input [1:0] cur_state, output x_out, output y_ou
 	localparam BACKGROUND_COLOUR = 3'b111;
 	
 	localparam 	UPDATE_WALL = 3'd0,
-					DEL_WALL = 3'd1,
-					DRAW_WALL = 3'd2;
-					//UPDATE_SCORE = 3'd3; 
+			DEL_WALL = 3'd1,
+			DRAW_WALL = 3'd2;
+			//UPDATE_SCORE = 3'd3; 
 
     // State mapping
     always @(*)
@@ -31,9 +31,9 @@ module datapath_wall(input clk, input [1:0] cur_state, output x_out, output y_ou
 								.width(WALL_WIDTH),
 								.height(WALL_HEIGHT),
 								.clk(clk),
-								.x_out(),
-								.y_out(),
-								.finished_draw()
+								.x_out(x_out),
+								.y_out(y_out),
+								.finished_draw()//not sure about this
 							);
 						end
 				UPDATE_WALL:
@@ -49,9 +49,9 @@ module datapath_wall(input clk, input [1:0] cur_state, output x_out, output y_ou
 								.width(WALL_WIDTH),
 								.height(WALL_HEIGHT),
 								.clk(clk),
-								.x_out(),
-								.y_out(),
-								.finished_draw()
+								.x_out(x_out),
+								.y_out(y_out),
+								.finished_draw()//not sure about this
 							);
 						end
 		  endcase
