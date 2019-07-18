@@ -24,15 +24,11 @@ module datapath_wall(input clk, input [1:0] cur_state, output [7:0] x_out, outpu
 				begin
 					wall_x <= wall_x - WALL_X_SPEED;
 					hole_y <= out;
-					if (hole_y < WALL_HEIGHT)
-						hole_y <= hole_y + HOLE_Y_SPEED;
-					else
-						hole_y <= hole_y - HOLE_Y_SPEED;
 				end
 		endcase
    end
    
 	assign x_out = wall_x;
 	assign y_out = hole_y;
-	
-endmodule
+
+endmodule	
