@@ -105,7 +105,7 @@ Week 2:
         Next week plan:
         
         By End of Tuesday:
-        Yatzu, Yifei: Test Flappy_Hawk
+        Yatzu, Yifei: Add draw states to each FSM, Test Flappy_Hawk
         Adil: Test data_path_wall, data_path_bird
         Jason: Test datapath
         
