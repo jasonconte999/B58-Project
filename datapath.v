@@ -1,12 +1,12 @@
 module datapath(
 		input clk,
 		input [3:0] cur_state,
-		output x_out
-		output y_out;
-		output collision;
-		output finished_draw;
-		output colour_out;
-		output score_out;
+		output [7:0] x_out,
+		output [7:0] y_out,
+		output [2:0] colour_out,
+		output [7:0] score_out,
+		output collision,
+		output finished_draw
 	);
 	//States
 	localparam DRAW_BIRD = 3'b000;
@@ -25,8 +25,9 @@ module datapath(
 	localparam WALL_COLOUR = 3'b100;
 	localparam BACKGROUND_COLOUR = 3'b111;
 
-	wire [7:0] bird_top_y, bird_bot_y, wall_left_x, wall_right_x, wall_top_hole_y, wall_bot_hole_y, wall_top_h, wall_bot_h, draw_x, draw_y, draw_w, draw_h;
-	wire collision, draw_enable;
+	wire [7:0] bird_top_y, bird_bot_y, wall_left_x, wall_right_x, wall_top_hole_y, wall_bot_hole_y, wall_top_h, wall_bot_h;
+	reg [7:0] draw_x, draw_y, draw_w, draw_h, score;
+	reg draw_enable;
 
 	assign bird_bot_y = bird_top_y + BIRD_W;
 	assign wall_right_x = wall_left_x + WALL_W;
@@ -37,14 +38,20 @@ module datapath(
 	// State mapping
 	always @(posedge clk)
 	begin
+		draw_x = 8'b00000000;
+		draw_y = 8'b00000000;
+		draw_w = 8'b00000000;
+		draw_h = 8'b00000000;
+		draw_enable = 1'b0;
 		case (cur_state)
 			DRAW_BIRD:
 				begin
-					draw_x = BIRD_LEFT_X;
-					draw_y = bird_top_y;
+					draw_x = BIRD_LEFT_X; //00001000
+					draw_y = bird_top_y; //00000100
 					draw_w = BIRD_W;
 					draw_h = BIRD_W;
 					draw_enable = 1'b1;
+					//colour_out = BIRD_COLOUR;
 				end
 			DRAW_WALL_TOP:
 				begin
@@ -53,6 +60,7 @@ module datapath(
 					draw_w = WALL_W;
 					draw_h = wall_top_h;
 					draw_enable = 1'b1;
+					score = 8'b00000010; //XXXX
 				end
 			DRAW_WALL_BOT:
 				begin
@@ -61,6 +69,7 @@ module datapath(
 					draw_w = WALL_W;
 					draw_h = wall_bot_h;
 					draw_enable = 1'b1;
+					score = 8'b00000100; //XXXX
 				end
 		endcase
 	end
@@ -79,7 +88,7 @@ module datapath(
 
 	wall_height_generator rg(
 		.clk(clk),
-		.resetn(1'b1),
+		.reset(1'b1),
 		.out(wall_top_hole_y)
 	);
 
@@ -106,5 +115,7 @@ module datapath(
 		.y_out(y_out),
 		.finished_draw(finished_draw)
     	);
+	assign score_out = score;
+	//assign colour_out[0] = draw_enable;
     
 endmodule
