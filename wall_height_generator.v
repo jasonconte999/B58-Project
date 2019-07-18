@@ -1,7 +1,7 @@
 // use a linear feedback shift register to generate nearly random numbers
 // the output then be used to determine the height of the wall in game
-module wall_height_generator(clk, reset, out)
-    input clk, reset;
+module wall_height_generator(clk, resetn, out)
+    input clk, resetn;
     output reg [7:0] out;
     // xor 2nd and 4th bits as feedback
     wire feedback = out[2] ^ out[4];
@@ -12,7 +12,7 @@ module wall_height_generator(clk, reset, out)
     
     always @ (posedge clock or negedge resetn)
     begin
-        if (~reset) 
+        if (~resetn) 
             number <= 5'hF;
             shift <= 0;
         else
