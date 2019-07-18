@@ -1,13 +1,12 @@
-module control_wall(go, touched, clk, resetn, start, move);
+module control_wall(go, touched, clk, resetn, current);
     input go;
     input touched;
     input clk;
     input resetn;
-    output reg start;
-    output reg move;
+    output reg current
     
-    localparam W_READY = 2'b00, W_MOVE = 2'b01, W_STOP = 2'b11;    
-    reg [1:0] current, next;
+    localparam W_READY = 3'b000, W_MOVE = 3'b001, W_STOP = 3'b011;    
+    reg [1:0] next;
 
     //state table for wall
     always@(*)
@@ -19,6 +18,7 @@ module control_wall(go, touched, clk, resetn, start, move);
             default next = W_READY;
         endcase
     end
+    /*
     //enable signals
     always@(*)
         begin: enable_signals
@@ -28,7 +28,7 @@ module control_wall(go, touched, clk, resetn, start, move);
                 W_READY: start = 1'b1;
                 W_MOVE: move = 1'b1;
             endcase
-        end
+        end*/
     
     //state register
     always@(posedge clk)
