@@ -36,6 +36,8 @@ module fpga_top(
 	wire clk;
 	wire [1:0] alu_select;
 	wire finished_draw, collision;
+	reg bird_curr;
+	reg wall_curr;
 
 	assign go = KEY[0];
 	assign clk = CLOCK_50;
@@ -45,8 +47,7 @@ module fpga_top(
 		.resetn(resetn),
 		.press_key(go),
 		.touched(collision),
-		.start(), //
-		.move() //
+		.current(bird_curr)
 	);
 	
 	control_wall wall_controller(
@@ -54,8 +55,7 @@ module fpga_top(
 		.touched(collision),
 		.clk(clk),
 		.resetn(resetn),
-		.start(), //
-		.move() //
+		.current(wall_curr)
 	);
 	
 	/*
@@ -72,6 +72,8 @@ module fpga_top(
 		.alu_select(alu_select),
 		.x_out(x),
 		.y_out(y),
+		.bird_curr(bird_curr),
+		.wall_curr(wall_curr),
 		.colour_out(colour),
 		.score_out(score),
 		.finished_draw(finished_draw),
