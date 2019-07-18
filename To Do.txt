@@ -2,9 +2,10 @@ Finished
   Control_bird 
   Control_wall
   Draw_rect (Jason)
+  Yatzu: Random_gen
 
-Adil: Datapath_bird, Datapath_wall
-Jason: Datapath
-Yifei: check_touched
-Yatzu: Random_gen
-Yifei/Yatzu: Flappy_Hawk
+To Test
+  Adil: Datapath_bird, Datapath_wall
+  Jason: Datapath
+  Yifei: check_touched
+  Yifei/Yatzu: Flappy_Hawk
