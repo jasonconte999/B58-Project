@@ -94,6 +94,27 @@ Week 1:
         Adil: implement and test datapath bird, datapath wall
         Jason: implement and test the parent data path
         
+Week 2:
+        Most of the goals we set out to finish were finished. Did not have enough time to fully test everything. Will go to Makerspace sessions next week to make up for this.
+        This Week:
+        Yatzu:
+        Yifei:
+        Adil:
+        Jason: Implemented and partially tested datapath
+        
+        Next week plan:
+        
+        By End of Tuesday:
+        Yatzu, Yifei: Test Flappy_Hawk
+        Adil: Test data_path_wall, data_path_bird
+        Jason: Test datapath
+        
+        By Thursday:
+        Yatzu: Get started on background graphics
+        Yifei: Get started on bird graphics
+        Adil: Get started on moving hole
+        Jason: Fully test everything (excluding additional things)
+        
         
 
 
