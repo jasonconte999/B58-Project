@@ -39,13 +39,33 @@ module fpga_top(
 
 	assign go = KEY[0];
 	assign clk = CLOCK_50;
-
+	
+	control_bird bird_controller(
+		.clk(clk),
+		.resetn(resetn),
+		.press_key(go),
+		.touched(collision),
+		.start(), //
+		.move() //
+	);
+	
+	control_wall wall_controller(
+		.go(go),
+		.touched(collision),
+		.clk(clk),
+		.resetn(resetn),
+		.start(), //
+		.move() //
+	);
+	
+	/*
 	control C0(
 		.clk(clk),
 		.finished_draw(finished_draw),
 		.collision(collision),
 		.alu_select(alu_select)
 	);
+	*/
 
 	datapath D0(
 		.clk(clk),
