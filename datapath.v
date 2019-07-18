@@ -79,7 +79,7 @@ module datapath(
 
 	wall_height_generator rg(
 		.clk(clk),
-		.reset(),
+		.resetn(1'b1),
 		.out(wall_top_hole_y)
 	);
 
