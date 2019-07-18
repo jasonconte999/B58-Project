@@ -1,7 +1,7 @@
 module datapath(
 		input clk,
 		input [3:0] cur_state,
-		output x_out;
+		output x_out
 		output y_out;
 		output collision;
 		output finished_draw;
@@ -77,7 +77,7 @@ module datapath(
 		.x_out(wall_left_x)
 	);
 
-	Random_gen rg(
+	wall_height_generator rg(
 		.clk(clk),
 		.reset(),
 		.out(wall_top_hole_y)
