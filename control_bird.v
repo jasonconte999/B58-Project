@@ -1,10 +1,9 @@
-module control_bird(clk, resetn, press_key, touched, start, move);
+module control_bird(clk, resetn, press_key, touched, curr_state);
         input clk;
         input resetn;
         input press_key;
         input touched;
-        output reg start;
-        output reg move;
+        output reg curr_state;
         //current state and next state
         reg [2:0] current, next;
         
@@ -28,7 +27,7 @@ module control_bird(clk, resetn, press_key, touched, start, move);
                 endcase
         end
         
-        //enable signals
+        /*//enable signals
         always@(*)
         begin: enable_signals
                 start = 1'b0;
@@ -39,7 +38,7 @@ module control_bird(clk, resetn, press_key, touched, start, move);
                         B_RAISING: move = 1'b1;
                         B_FALLING: move  = 1'b1;
                 endcase
-        end
+        end*/
                 
         
         //state register
