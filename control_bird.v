@@ -1,11 +1,11 @@
-module control_bird(clk, resetn, press_key, touched, curr_state);
+module control_bird(clk, resetn, press_key, touched, current);
         input clk;
         input resetn;
         input press_key;
         input touched;
-        output reg curr_state;
+        output reg current;
         //current state and next state
-        reg [2:0] current, next;
+        reg next;
         
         localparam B_READY = 3'b000, B_START = 3'b010, B_RAISING = 3'b110, B_FALLING = 3'b011, B_STOP = 3'b001;
         
