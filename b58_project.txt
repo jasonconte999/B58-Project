@@ -98,8 +98,8 @@ Week 2:
         Most of the goals we set out to finish were finished. Did not have enough time to fully test everything. Will go to Makerspace sessions next week to make up for this.
         This Week:
         Yatzu: Implemented and fully tested wall_height_generator (random_gen)
-        Yifei:
-        Adil:
+        Yifei: Fully tested check_touched
+        Adil: Fully implemented datapath bird and datapath wall
         Jason: Implemented and partially tested datapath
         
         Next week plan:
