@@ -15,14 +15,24 @@ module draw_rect(
 
 	always @(posedge clk)
 	begin
-		if (draw_x < width)
-			draw_x = draw_x + 1;
-		else if (draw_y < height - 1) begin
-			draw_x = 8'b0;
-			draw_y = draw_y + 1;
+		if (enable == 1'b1)
+		begin
+			if (draw_x < width - 1)
+				draw_x = draw_x + 1;
+			else if (draw_y < height - 1) 
+			begin
+				draw_x = 8'b0;
+				draw_y = draw_y + 1;
 			end
+			else
+				finished_draw_reg = 1'b1;
+		end
 		else
-			finished_draw_reg = 1'b1;
+		begin
+			draw_x = 8'b00000000;
+			draw_y = 8'b00000000;
+			finished_draw_reg = 1'b0;
+		end
 	end
 	
 	assign x_out = start_x + draw_x;

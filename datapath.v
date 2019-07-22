@@ -3,17 +3,16 @@ module datapath(
 		input [3:0] cur_state,
 		output [7:0] x_out,
 		output [7:0] y_out,
-		output [2:0] colour_out,
+		output [7:0] colour_out,
 		output [7:0] score_out,
 		output collision,
 		output finished_draw
 	);
-	//States
+	
 	localparam DRAW_BIRD = 3'b000;
 	localparam DRAW_WALL_TOP = 3'b001;
 	localparam DRAW_WALL_BOT = 3'b010;
-
-	localparam BIRD_W = 8'b00000100;
+	localparam BIRD_W = 8'b00000011;
 	localparam BIRD_LEFT_X = 8'b00001000;
 	localparam BIRD_RIGHT_X = 8'b00001100; //left x + bird width
 	localparam BIRD_COLOUR = 3'b010;
@@ -26,53 +25,37 @@ module datapath(
 	localparam BACKGROUND_COLOUR = 3'b111;
 
 	wire [7:0] bird_top_y, bird_bot_y, wall_left_x, wall_right_x, wall_top_hole_y, wall_bot_hole_y, wall_top_h, wall_bot_h;
-	reg [7:0] draw_x, draw_y, draw_w, draw_h, score;
-	reg draw_enable;
+	wire [7:0] draw_x, draw_y, draw_w, draw_h, draw_x_out, draw_y_out;
+	wire draw_enable;
+	reg [7:0] score;
 
 	assign bird_bot_y = bird_top_y + BIRD_W;
 	assign wall_right_x = wall_left_x + WALL_W;
 	assign wall_bot_hole_y = wall_top_hole_y + HOLE_HEIGHT;
 	assign wall_top_h = wall_top_hole_y - WALL_TOP_Y;
 	assign wall_bot_h = WALL_BOT_Y - wall_bot_hole_y;
-
-	// State mapping
-	always @(posedge clk)
-	begin
-		draw_x = 8'b00000000;
-		draw_y = 8'b00000000;
-		draw_w = 8'b00000000;
-		draw_h = 8'b00000000;
-		draw_enable = 1'b0;
-		case (cur_state)
-			DRAW_BIRD:
-				begin
-					draw_x = BIRD_LEFT_X; //00001000
-					draw_y = bird_top_y; //00000100
-					draw_w = BIRD_W;
-					draw_h = BIRD_W;
-					draw_enable = 1'b1;
-					//colour_out = BIRD_COLOUR;
-				end
-			DRAW_WALL_TOP:
-				begin
-					draw_x = wall_left_x;
-					draw_y = WALL_TOP_Y;
-					draw_w = WALL_W;
-					draw_h = wall_top_h;
-					draw_enable = 1'b1;
-					score = 8'b00000010; //XXXX
-				end
-			DRAW_WALL_BOT:
-				begin
-					draw_x = wall_left_x;
-					draw_y = wall_bot_hole_y;
-					draw_w = WALL_W;
-					draw_h = wall_bot_h;
-					draw_enable = 1'b1;
-					score = 8'b00000100; //XXXX
-				end
-		endcase
-	end
+	assign draw_x = cur_state == DRAW_WALL_TOP || cur_state == DRAW_WALL_BOT ? wall_left_x : 
+						 cur_state == DRAW_BIRD ? BIRD_LEFT_X : 
+						 8'b00000000; //DEFAULT
+	assign draw_y = cur_state == DRAW_WALL_BOT ? wall_bot_hole_y : 
+						 cur_state == DRAW_WALL_TOP ? WALL_TOP_Y : 
+						 cur_state == DRAW_BIRD ? bird_top_y : 
+						 8'b00000000; //DEFAULT
+	assign draw_w = cur_state == DRAW_WALL_TOP || cur_state == DRAW_WALL_BOT ? WALL_W : 
+						 cur_state == DRAW_BIRD ? BIRD_W : 
+						 8'b00000000; //DEFAULT
+	assign draw_h = cur_state == DRAW_WALL_BOT ? wall_bot_h : 
+						 cur_state == DRAW_WALL_TOP ? wall_top_h : 
+						 cur_state == DRAW_BIRD ? BIRD_W : 
+						 8'b00000000; //DEFAULT
+	assign draw_enable = cur_state == DRAW_WALL_TOP || cur_state == DRAW_WALL_BOT || cur_state == DRAW_BIRD ? 1'b1 : 
+						 1'b0; //DEFAULT
+	assign x_out = draw_enable ? draw_x_out : 8'b00000000;
+	assign y_out = draw_enable ? draw_y_out : 8'b00000000;
+	
+	assign score_out = score;
+	
+	assign colour_out = wall_top_hole_y;
     
 	datapath_bird db (
 		.clk(clk),
@@ -88,19 +71,19 @@ module datapath(
 
 	wall_height_generator rg(
 		.clk(clk),
-		.reset(1'b1),
+		.resetn(1'b1),
 		.out(wall_top_hole_y)
 	);
 
 	check_touched ct(
-		.bird_xleft(BIRD_LEFT_X),
-		.bird_xright(BIRD_RIGHT_X),
-		.bird_ytop(bird_top_y),
-		.bird_ybottom(bird_bot_y),
-		.wall_xleft(wall_left_x),
-		.wall_xright(wall_right_x),
-		.wall_topy(wall_top_hole_y),
-		.wall_bottomy(wall_bot_hole_y),
+		.bird_xleft(BIRD_LEFT_X), //00001000
+		.bird_xright(BIRD_RIGHT_X), //00001100
+		.bird_ytop(bird_top_y), //00000100
+		.bird_ybottom(bird_bot_y), //00000111
+		.wall_xleft(wall_left_x), //00010000
+		.wall_xright(wall_right_x), //00011010
+		.wall_topy(wall_top_hole_y), //00010000
+		.wall_bottomy(wall_bot_hole_y), //01000010
 		.touched(collision)
 	);
 
@@ -111,11 +94,9 @@ module datapath(
 		.height(draw_h),
 		.clk(clk),
 		.enable(draw_enable),
-		.x_out(x_out),
-		.y_out(y_out),
+		.x_out(draw_x_out),
+		.y_out(draw_y_out),
 		.finished_draw(finished_draw)
     	);
-	assign score_out = score;
-	//assign colour_out[0] = draw_enable;
     
 endmodule
