@@ -3,7 +3,7 @@ module control(clk, resetn, go, touched, cur_state, bird_curr, wall_curr);
         output reg cur_state, bird_curr, wall_curr;
 	reg next;
         
-	localparam DRAW_WALL = 2'b00, DRAW_BIRD = 2'b01;
+	localparam DRAW_WALL = 3'b00, DRAW_BIRD = 3'b01; // DRAW_BACKGROUND = 3'b10,
 	
         control_bird bird_controller(
                 .clk(clk),
