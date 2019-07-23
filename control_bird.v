@@ -8,7 +8,7 @@ module control_bird(clk, resetn, flag, press_key, touched, current);
         //current state and next state
         reg next, afterDraw;
         
-        localparam /*B_READY = 3'b000,*/ B_START = 3'b010, B_RAISING = 3'b110, B_FALLING = 3'b011, B_STOP = 3'b001, B_DRAW = 111;
+        localparam B_START = 3'b010, B_RAISING = 3'b110, B_FALLING = 3'b011, B_STOP = 3'b001, B_DRAW = 111; /*B_READY = 3'b000,*/
         
         always@(*)
         begin: state_table
@@ -24,7 +24,7 @@ module control_bird(clk, resetn, flag, press_key, touched, current);
                         end
                         B_RAISING: begin
                                 if (touched) afterDraw <= B_STOP;
-                                else afterDraw  = press_key ? B_RAISING : B_FALLING;
+                                else afterDraw  = flag ? B_RAISING : B_FALLING;
                                 //else afterDraw  = press_key ? B_RAISING : B_FALLING;
                                 next = B_DRAW;
                         end
