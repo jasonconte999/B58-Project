@@ -8,4 +8,4 @@ To Test
   Adil: Datapath_bird, Datapath_wall
   Jason: Datapath
   Yifei: check_touched
-  Yifei/Yatzu: Flappy_Hawk
+  Yifei/Yatzu: Flappy_Hawk, Control
