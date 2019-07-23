@@ -19,7 +19,7 @@ module control_bird(clk, resetn, flag, press_key, touched, current);
                                 next = B_DRAW;
                         end*/
                         B_START: begin
-                                afterDraw = press_key ? B_RAISING : B_FALLING;
+                                afterDraw = press_key ? B_RAISING : B_START;
                                 next = B_DRAW;
                         end
                         B_RAISING: begin
