@@ -10,10 +10,10 @@ module control(clk, resetn, go, touched, current);
                 .current(bird_curr)
 	      );
 	
-	      control_wall wall_controller(
-		            .go(go),
-		            .touched(collision),
-		            .clk(clk),
-		            .resetn(resetn),
-		            .current(wall_curr)
-	       );
+	control_wall wall_controller(
+		.go(go),
+		.touched(collision),
+		.clk(clk),
+		.resetn(resetn),
+		.current(wall_curr)
+	      );
