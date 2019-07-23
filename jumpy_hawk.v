@@ -44,7 +44,7 @@ module jumpy_hawk(
 	assign clk = CLOCK_50;
 	
 	
-	control c0(
+	control C0(
 		.clk(clk),
 		.resetn(resetn),
 		.go(go), 
