@@ -2,6 +2,8 @@ module control(clk, resetn, go, touched, current, bird_curr, wall_curr);
         input clk, resetn, go, collision;
         output reg current, bird_curr, wall_curr;
         
+	localparam BIRD = , WALL = ;
+	
         control_bird bird_controller(
                 .clk(clk),
                 .resetn(resetn),
@@ -17,3 +19,4 @@ module control(clk, resetn, go, touched, current, bird_curr, wall_curr);
 		.resetn(resetn),
 		.current(wall_curr)
 	      );
+  
