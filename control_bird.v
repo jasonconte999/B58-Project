@@ -5,24 +5,36 @@ module control_bird(clk, resetn, press_key, touched, current);
         input touched;
         output reg current;
         //current state and next state
-        reg next;
+        reg next, afterDraw;
         
-        localparam B_READY = 3'b000, B_START = 3'b010, B_RAISING = 3'b110, B_FALLING = 3'b011, B_STOP = 3'b001;
+        localparam B_READY = 3'b000, B_START = 3'b010, B_RAISING = 3'b110, B_FALLING = 3'b011, B_STOP = 3'b001, B_DRAW = 111;
         
         always@(*)
         begin: state_table
                 case(current)
-                        B_READY: next = press_key ? B_START : B_READY;
-                        B_START: next = press_key ? B_RAISING : B_FALLING;
+                        B_READY: begin
+                                afterDraw = press_key ? B_START : B_READY;
+                                next = B_DRAW;
+                        end
+                        B_START: begin
+                                afterDraw = press_key ? B_RAISING : B_FALLING;
+                                next = B_DRAW;
+                        end
                         B_RAISING: begin
-                                if(touched) next <= B_STOP;
-                                else next  = press_key ? B_RAISING : B_FALLING;
+                                if (touched) afterDraw <= B_STOP;
+                                else afterDraw  = press_key ? B_RAISING : B_FALLING;
+                                next = B_DRAW;
                         end
                         B_FALLING: begin
-                                if(touched) next <= B_STOP;
-                                else next  = press_key ? B_RAISING : B_FALLING;
+                                if (touched) afterDraw <= B_STOP;
+                                else afterDraw  = press_key ? B_RAISING : B_FALLING;
+                                next = B_DRAW;
                         end
-                        B_STOP: next = B_READY;
+                        B_STOP: begin
+                                afterDraw = B_READY;
+                                next = B_DRAW;
+                        end
+                        B_DRAW: next = afterDraw;
                         default next = B_READY;
                 endcase
         end
