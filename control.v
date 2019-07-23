@@ -1,6 +1,6 @@
-module control(clk, resetn, go, touched, current);
+module control(clk, resetn, go, touched, current, bird_curr, wall_curr);
         input clk, resetn, go, collision;
-        output reg current;
+        output reg current, bird_curr, wall_curr;
         
         control_bird bird_controller(
                 .clk(clk),
