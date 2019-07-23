@@ -24,7 +24,7 @@ module control_bird(clk, resetn, flag, press_key, touched, current);
                         end
                         B_RAISING: begin
                                 if (touched) afterDraw <= B_STOP;
-                                else afterDraw  = flag ? B_RAISING : B_FALLING;
+                                else afterDraw  = flag ? B_FALLING : B_RAISING;
                                 //else afterDraw  = press_key ? B_RAISING : B_FALLING;
                                 next = B_DRAW;
                         end
