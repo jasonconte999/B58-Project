@@ -24,10 +24,14 @@ module control(clk, resetn, go, touched, cur_state, bird_curr, wall_curr);
 	always@(*)
         begin: state_table
                 case(finished_draw)
-			DRAW_WALL: next = DRAW_BIRD;
-			cur_state = wall_curr;
-			DRAW_BIRD: next = ;
-			cur_state = bird_curr;
+			DRAW_WALL: begin 
+				cur_state = wall_curr;
+				next = DRAW_BIRD;
+			end
+			DRAW_BIRD: begin 
+				cur_state = bird_curr;
+				next = DRAW_WALL;
+			end
                         default next = DRAW_WALL;
                 endcase
         end
