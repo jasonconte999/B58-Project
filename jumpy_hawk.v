@@ -43,7 +43,30 @@ module fpga_top(
 	assign go = KEY[0];
 	assign clk = CLOCK_50;
 	
-	control_bird bird_controller(
+	
+	control c0(
+		.clk(clk),
+		.resetn(resetn),
+		.go(go), 
+		.touched(collision),
+		.cur_state(cur_state),
+		.bird_curr(bird_curr),//
+		.wall_curr(wall_curr)//
+	);
+
+	datapath D0(
+		.clk(clk),
+		.x_out(x),
+		.y_out(y),
+		.colour_out(colour), //[7:0]
+		.score_out(score), //[7:0]
+		.collision(collision),
+		.finished_draw(finished_draw),
+		.cur_state(), //[3:0]
+	);
+	
+	/*
+		control_bird bird_controller(
 		.clk(clk),
 		.resetn(resetn),
 		.press_key(go),
@@ -59,17 +82,6 @@ module fpga_top(
 		.current(wall_curr)
 	);
 	
-	control(
-		.clk(clk),
-		.resetn(resetn),
-		.go(go), 
-		.touched(collision),
-		.cur_state(cur_state),
-		.bird_curr(),//
-		.wall_curr()//
-	);
-	
-	/*
 	control C0(
 		.clk(clk),
 		.finished_draw(finished_draw),
@@ -91,16 +103,7 @@ module fpga_top(
 		.collision(collision)
 	);
 	*/
-	datapath D(
-		.clk(clk),
-		.x_out(x),
-		.y_out(y),
-		.colour_out(colour), //[7:0]
-		.score_out(score), //[7:0]
-		.collision(collision),
-		.finished_draw(finished_draw),
-		.cur_state(), //[3:0]
-	);
+
 
 	vga_adapter VGA(
 			.resetn(resetn),
