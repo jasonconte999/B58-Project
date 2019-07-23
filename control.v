@@ -4,7 +4,7 @@ module control(clk, resetn, go, touched, cur_state, bird_curr, wall_curr);
         output reg cur_state, bird_curr, wall_curr;
 	reg next;
         
-	localparam DRAW_WALL = 3'b00, DRAW_BIRD = 3'b01; // DRAW_BACKGROUND = 3'b10,
+	localparam WALL = 3'b00, BIRD = 3'b01; // BACKGROUND = 3'b10,
 	
         control_bird bird_controller(
                 .clk(clk),
@@ -26,19 +26,19 @@ module control(clk, resetn, go, touched, cur_state, bird_curr, wall_curr);
         begin: state_table
                 case(cur_state)
 			/*
-			DRAW_BACKGROUND: begin
+			BACKGROUND: begin
 				cur_state = ;
-				next = DRAW_WALL;
+				next = WALL;
 			*/
-			DRAW_WALL: begin
+			WALL: begin
 				cur_state = wall_curr;
-				next = DRAW_BIRD;
+				next = BIRD;
 			end
-			DRAW_BIRD: begin 
+			BIRD: begin 
 				cur_state = bird_curr;
-				next = DRAW_WALL;
+				next = WALL;
 			end
-                        default next = DRAW_WALL;
+                        default next = WALL;
                 endcase
         end
         
@@ -46,7 +46,7 @@ module control(clk, resetn, go, touched, cur_state, bird_curr, wall_curr);
         always@(posedge clk)
         begin: state_FFS
                 if (!resetn)
-                        cur_state <= DRAW_WALL;
+                        cur_state <= WALL;
                 else
                         cur_state <= next;
         end
