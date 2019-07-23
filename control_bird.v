@@ -1,4 +1,4 @@
-module control_bird(clk, resetn, press_key, touched, current);
+module control_bird(clk, resetn, flag, press_key, touched, current);
         input clk;
         input resetn;
         input press_key;
