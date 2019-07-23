@@ -38,6 +38,7 @@ module fpga_top(
 	wire finished_draw, collision;
 	reg bird_curr;
 	reg wall_curr;
+	reg cur_state;//
 
 	assign go = KEY[0];
 	assign clk = CLOCK_50;
@@ -58,6 +59,16 @@ module fpga_top(
 		.current(wall_curr)
 	);
 	
+	control(
+		.clk(clk),
+		.resetn(resetn),
+		.go(go), 
+		.touched(collision),
+		.cur_state(cur_state),
+		.bird_curr(),//
+		.wall_curr()//
+	);
+	
 	/*
 	control C0(
 		.clk(clk),
@@ -65,7 +76,7 @@ module fpga_top(
 		.collision(collision),
 		.alu_select(alu_select)
 	);
-	*/
+	
 
 	datapath D0(
 		.clk(clk),
@@ -78,6 +89,17 @@ module fpga_top(
 		.score_out(score),
 		.finished_draw(finished_draw),
 		.collision(collision)
+	);
+	*/
+	datapath D(
+		.clk(clk),
+		.x_out(x),
+		.y_out(y),
+		.colour_out(colour), //[7:0]
+		.score_out(score), //[7:0]
+		.collision(collision),
+		.finished_draw(finished_draw),
+		.cur_state(), //[3:0]
 	);
 
 	vga_adapter VGA(
