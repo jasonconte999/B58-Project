@@ -23,8 +23,8 @@ module control(clk, resetn, go, touched, cur_state, bird_curr, wall_curr);
   
 	always@(*)
         begin: state_table
-                case(finished_draw)
-			DRAW_WALL: begin 
+                case(cur_state)
+			DRAW_WALL: begin
 				cur_state = wall_curr;
 				next = DRAW_BIRD;
 			end
