@@ -1,4 +1,4 @@
-module fpga_top(
+module jumpy_hawk(
 		CLOCK_50,						//	On Board 50 MHz
         	KEY,
 		VGA_CLK,   						//	VGA Clock
@@ -50,8 +50,8 @@ module fpga_top(
 		.go(go), 
 		.touched(collision),
 		.cur_state(cur_state),
-		.bird_curr(bird_curr),//
-		.wall_curr(wall_curr)//
+		.bird_curr(bird_curr),
+		.wall_curr(wall_curr)
 	);
 
 	datapath D0(
@@ -62,11 +62,11 @@ module fpga_top(
 		.score_out(score), //[7:0]
 		.collision(collision),
 		.finished_draw(finished_draw),
-		.cur_state(), //[3:0]
+		.cur_state(cur_state) //[3:0]
 	);
 	
 	/*
-		control_bird bird_controller(
+	control_bird bird_controller(
 		.clk(clk),
 		.resetn(resetn),
 		.press_key(go),
