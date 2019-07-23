@@ -1,5 +1,5 @@
-module control(clk, resetn, go, touched, cur_state, bird_curr, wall_curr);
-        input clk, resetn, collision;
+module control(clk, resetn, go, touched, flag, cur_state, bird_curr, wall_curr);
+        input clk, resetn, collision, flag;
 	input reg go;
         output reg cur_state, bird_curr, wall_curr;
 	reg next;
@@ -8,6 +8,7 @@ module control(clk, resetn, go, touched, cur_state, bird_curr, wall_curr);
 	
         control_bird bird_controller(
                 .clk(clk),
+		.flag(flag),
                 .resetn(resetn),
                 .press_key(go),
                 .touched(collision),
