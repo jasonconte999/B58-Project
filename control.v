@@ -1,10 +1,10 @@
 module control(clk, resetn, go, touched, flag, cur_state, bird_curr, wall_curr);
         input clk, resetn, collision, flag;
 	input reg go;
-        output reg cur_state, bird_curr, wall_curr;
-	reg next;
+	output reg [2:0] cur_state, bird_curr, wall_curr;
+	reg [2:0] next;
         
-	localparam WALL = 3'b00, BIRD = 3'b01; // BACKGROUND = 3'b10,
+	localparam WALL = 3'b000, BIRD = 3'b001; // BACKGROUND = 3'b10,
 	
         control_bird bird_controller(
                 .clk(clk),
