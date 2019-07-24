@@ -36,9 +36,7 @@ module jumpy_hawk(
 	wire clk;
 	wire [1:0] alu_select;
 	wire finished_draw, collision;
-	reg bird_curr;
-	reg wall_curr;
-	reg cur_state;//
+	reg [2:0] bird_curr, wall_curr, cur_state;
 
 	assign go = KEY[0];
 	assign clk = CLOCK_50;
