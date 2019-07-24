@@ -3,11 +3,10 @@ module control_wall(go, touched, clk, resetn, current);
     input touched;
     input clk;
     input resetn;
-    output reg current;
+    output reg [2:0] current;
     
     localparam W_READY = 3'b000, W_MOVE = 3'b001, W_STOP = 3'b011, W_DRAW = 3'b111;
-    reg [1:0] next;
-    reg afterDraw;
+    reg [2:0] next, afterDraw;
 
     
     // state table for wall
