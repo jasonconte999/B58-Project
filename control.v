@@ -1,3 +1,20 @@
+module control(SW, LEDR, KEY);
+	input [9:0] SW;
+   input [3:0] KEY;
+   output [17:0] LEDR;
+
+	control2 C(
+		.clk(KEY[3]),
+		.resetn(SW[0]),
+		.go(SW[1]),
+		.flag(SW[2]),
+		.collision(SW[3]),
+		.bird_curr(LEDR[3:0]),
+		.wall_curr(LEDR[7:4]),
+		.cur_state(LEDR[17:14]),
+		.cur_par_state(LEDR[13:10])
+		);
+endmodule
 module control(clk, resetn, go, touched, flag, collision, cur_state, bird_curr, wall_curr);
 	input clk, resetn, flag, collision, go;
 	output reg [3:0] cur_state;
