@@ -4,11 +4,11 @@ module control_bird(clk, resetn, flag, press_key, touched, current);
         input press_key;
         input touched;
         input flag; // whether bird is too high
-        output reg [2:0] current;
+        output reg [3:0] current;
         //current state and next state
-        reg [2:0] next, afterDraw;
+        reg [3:0] next, afterDraw;
         
-        localparam B_START = 3'b001, B_RAISING = 3'b010, B_FALLING = 3'b011, B_STOP = 3'b100, B_DRAW = 3'b111; /*B_READY = 3'b000,*/
+        localparam B_START = 4'b0000, B_RAISING = 4'b0001, B_FALLING = 4'b0010, B_STOP = 4'b0011, B_DRAW = 4'b0100; /*B_READY = 3'b000,*/
         
         always@(*)
         begin: state_table
@@ -25,7 +25,6 @@ module control_bird(clk, resetn, flag, press_key, touched, current);
                         B_RAISING: begin
                                 if (touched) afterDraw <= B_STOP;
                                 else afterDraw  <= flag ? B_FALLING : B_RAISING;
-                                //else afterDraw  = press_key ? B_RAISING : B_FALLING;
                                 next <= B_DRAW;
                         end
                         B_FALLING: begin
