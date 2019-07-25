@@ -14,16 +14,17 @@ module control_wall(go, touched, clk, resetn, current);
     begin: state_table
         case(current)
             W_READY: begin
-                afterDraw = go ? W_MOVE : W_READY; //move until the go is high
+                afterDraw = go ? W_MOVE : W_READY; // move until the go is high
                 next = W_DRAW;
             end
             W_MOVE : begin 
-                afterDraw = touched ? W_STOP : W_MOVE; //stop if it's touched
+                afterDraw = touched ? W_STOP : W_MOVE; // stop if it's touched
                 next = W_DRAW;
             end
             W_STOP: begin
-                afterDraw = W_READY;
-                next = W_DRAW;
+                //afterDraw = W_READY;
+                //next = W_DRAW;
+		        next = W_READY;
             end
             W_DRAW: next = afterDraw;
             default next = W_READY;
