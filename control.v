@@ -11,8 +11,7 @@ module control(SW, LEDR, KEY);
 		.collision(SW[3]),
 		.bird_curr(LEDR[3:0]),
 		.wall_curr(LEDR[7:4]),
-		.cur_state(LEDR[17:14]),
-		.cur_par_state(LEDR[13:10])
+		.cur_state(LEDR[17:14])
 		);
 endmodule
 
