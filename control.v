@@ -1,66 +1,55 @@
 module control(clk, resetn, go, touched, flag, collision, cur_state, bird_curr, wall_curr);
-    input go;
-    input touched;
-    input clk;
-    input resetn;
-    output reg [3:0] current;
-    
-    localparam W_READY = 4'b0101, W_MOVE = 4'b0110, W_STOP = 4'b0111, W_DRAW = 4'b1000;
-    reg [3:0] next, afterDraw;
-
-    
-    // state table for wall
-    always@(*)
-    begin: state_table
-        case(current)
-            W_READY: begin
-                afterDraw = go ? W_MOVE : W_READY; // move until the go is high
-                next = W_DRAW;
-            end
-            W_MOVE : begin 
-                afterDraw = touched ? W_STOP : W_MOVE; // stop if it's touched
-                next = W_DRAW;
-            end
-            W_STOP: begin
-                //afterDraw = W_READY;
-                //next = W_DRAW;
-		next = W_READY;
-            end
-            W_DRAW: next = afterDraw;
-            default next = W_READY;
+	input clk, resetn, flag, collision, go;
+	output reg [3:0] cur_state;
+	output [3:0] bird_curr, wall_curr;
+	reg [3:0] next;
+	reg gogo;
+	
+	always@(*)
+	begin
+			if (go == 1'b0) gogo <= 1'b0;
+			else gogo <= 1'b1;
+	end
+	//localparam WALL = 4'b1111, BIRD = 4'b1110;
+	control_bird bird_controller(
+		.clk(clk),
+		.flag(flag),
+		.resetn(resetn),
+		.press_key(gogo),
+		.touched(collision),
+		.current(bird_curr));
+	
+	control_wall wall_controller(
+		.go(gogo),
+		.touched(collision),
+		.clk(clk),
+		.resetn(resetn),
+		.current(wall_curr));
+	
+	always@(*)
+        begin: state_table
+        case(cur_state)
+			/*
+			BACKGROUND: begin
+				next = wall_curr;
+			end
+			*/
+			wall_curr: begin
+				next <= bird_curr;
+			end
+			bird_curr: begin 
+				next <= wall_curr;
+			end
+			default next <= wall_curr;
         endcase
-    end
-    /*
-    //state table for wall
-    always@(*)
-    begin: state_table
-        case(current)
-            W_READY: next = go ? W_MOVE : W_READY; //move until the go is high
-            W_MOVE : next = touched ? W_STOP : W_MOVE; //stop if it's touched
-            W_STOP: next = W_READY;
-            default next = W_READY;
-        endcase
-    end
-    */
-    
-    /*
-    //enable signals
-    always@(*)
-        begin: enable_signals
-            start = 1'b0;
-            move = 1'b0;
-            case(current)
-                W_READY: start = 1'b1;
-                W_MOVE: move = 1'b1;
-            endcase
-        end*/
-    
+        end
+        
     //state register
     always@(posedge clk)
-    begin: state_FFS
-        if (!resetn)
-            current <= W_READY;
-        else
-            current <= next;
-    end
+        begin: state_FFS
+                if (!resetn)
+                        cur_state <= wall_curr;
+                else
+                        cur_state <= next;
+        end
 endmodule
