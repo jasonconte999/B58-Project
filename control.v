@@ -15,7 +15,8 @@ module control(SW, LEDR, KEY);
 		.cur_par_state(LEDR[13:10])
 		);
 endmodule
-module control(clk, resetn, go, touched, flag, collision, cur_state, bird_curr, wall_curr);
+
+module control2(clk, resetn, go, touched, flag, collision, cur_state, bird_curr, wall_curr);
 	input clk, resetn, flag, collision, go;
 	output reg [3:0] cur_state;
 	output [3:0] bird_curr, wall_curr;
