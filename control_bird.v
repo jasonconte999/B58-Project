@@ -35,7 +35,7 @@ module control_bird(clk, resetn, flag, press_key, touched, current);
                         B_STOP: begin
                                 //afterDraw <= B_START;
                                 //next <= B_DRAW;
-				next <= B_START;
+				if (touched) next <= B_START;
                         end
                         B_DRAW: next <= afterDraw;
                         default next <= B_START;
