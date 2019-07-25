@@ -33,12 +33,12 @@ module control(clk, resetn, go, touched, flag, collision, cur_state, bird_curr, 
 				next = wall_curr;
 			end
 			*/
-			3'b000: begin
-				cur_par_state <= 3'b001;
+			4'b0000: begin
+				cur_par_state <= 4'b0001;
 				next <= bird_curr;
 			end
-			3'b001: begin 
-				cur_par_state <= 3'b000;
+			4'b0001: begin 
+				cur_par_state <= 4'b0000;
 				next <= wall_curr;
 			end
 			default next <= wall_curr;
