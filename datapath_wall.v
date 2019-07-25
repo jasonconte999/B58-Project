@@ -1,18 +1,11 @@
 module datapath_wall(input clk, input [1:0] cur_state, output [7:0] x_out);
    // registers
-	reg [7:0] wall_x;
+	reg [7:0] wall_x = 8'd160;//wall starts at 160
 	
-	localparam WALL_X_SPEED = 8'b00000100;//Speed of wall is 4
+	localparam WALL_X_SPEED = 8'd4;//Speed of wall is 4
 	localparam WALL_HEIGHT = 8'b01111000;//height of wall is 120
-	localparam HOLE_Y_SPEED = 8'b00000100;//hole moves at speed 4
 	
 	localparam 	UPDATE_WALL = 3'd0;
-
-	wall_height_generator rg(
-		.clk(clk),
-		.reset(),
-		.out(out)
-	);
 	
    // State mapping
    always @(*)
@@ -28,3 +21,4 @@ module datapath_wall(input clk, input [1:0] cur_state, output [7:0] x_out);
 	assign x_out = wall_x;
 
 endmodule	
+
