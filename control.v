@@ -1,28 +1,25 @@
 module control(clk, resetn, go, touched, flag, collision, cur_state, bird_curr, wall_curr);
-   input clk, resetn, touched, flag, collision;
-	input reg go; //error
-	output reg [2:0] cur_state, bird_curr, wall_curr;
-	reg [2:0] next;
-	 
-	localparam WALL = 3'b000, BIRD = 3'b001; // BACKGROUND = 3'b10,
+	input clk, resetn, flag, collision, go;
+	//input reg go; //error
+	output reg [3:0] cur_state;
+	output [3:0] bird_curr, wall_curr;
+	reg [3:0] next;
 	
-        control_bird bird_controller(
-                .clk(clk),
-					 .flag(flag),
-                .resetn(resetn),
-                .press_key(go),
-                .touched(collision),
-                .current(bird_curr)
-	      );
+	control_bird bird_controller(
+		.clk(clk),
+		.flag(flag),
+		.resetn(resetn),
+		.press_key(go),
+		.touched(collision),
+		.current(bird_curr));
 	
 	control_wall wall_controller(
 		.go(go),
 		.touched(collision),
 		.clk(clk),
 		.resetn(resetn),
-		.current(wall_curr)
-	      );
-  
+		.current(wall_curr));
+	
 	always@(*)
         begin: state_table
         case(cur_state)
@@ -30,24 +27,23 @@ module control(clk, resetn, go, touched, flag, collision, cur_state, bird_curr, 
 			BACKGROUND: begin
 				cur_state = ;
 				next = WALL;
+			end
 			*/
-			WALL: begin
-				cur_state <= wall_curr;
-				next <= BIRD;
+			wall_curr: begin
+				next <= bird_curr;
 			end
-			BIRD: begin 
-				cur_state <= bird_curr;
-				next <= WALL;
+			bird_curr: begin 
+				next <= wall_curr;
 			end
-			default next <= WALL;
+			default next <= wall_curr;
         endcase
         end
         
-        //state register
+    //state register
     always@(posedge clk)
         begin: state_FFS
                 if (!resetn)
-                        cur_state <= WALL; //error
+                        cur_state <= wall_curr;
                 else
                         cur_state <= next;
         end
