@@ -6,7 +6,7 @@ module datapath_wall(input clk, input [1:0] cur_state, output [7:0] x_out);
 	//localparam HOLE_HEIGHT = 8'b00110010; //Hole is 50 pixels high
 	
 	// registers
-	reg [7:0] wall_x = 8'd0;// WALL_START;
+	reg [7:0] wall_x = WALL_START;
 	
 	localparam 	UPDATE_WALL = 3'd0;
 	
@@ -26,4 +26,3 @@ module datapath_wall(input clk, input [1:0] cur_state, output [7:0] x_out);
 	assign x_out = wall_x;
 
 endmodule	
-
