@@ -1,8 +1,13 @@
-module control(SW, LEDR, KEY);
-	input clk, resetn, touched, flag, collision, go;
-	output reg [3:0] cur_state;
+module control(clk, resetn, touched, flag, collision, go, cur_state_out, bird_curr, wall_curr);
+	input clk;
+	input resetn;
+	input touched;
+	input flag;
+	input collision;
+	input go;
+	output [3:0] cur_state_out;
 	output [3:0] bird_curr, wall_curr;
-	reg [3:0] next, cur_par_state;
+	reg [3:0] next, cur_par_state = 4'b0000;
 	reg gogo;
 	wire [3:0] bird_state_out, wall_state_out;
 	
@@ -17,14 +22,14 @@ module control(SW, LEDR, KEY);
 		.resetn(resetn),
 		.press_key(gogo),
 		.touched(collision),
-		.current(bird_state_out));
+		.current_out(bird_state_out));
 	
 	control_wall wall_controller(
 		.go(gogo),
 		.touched(collision),
 		.clk(clk),
 		.resetn(resetn),
-		.current(wall_state_out));
+		.current_out(wall_state_out));
 	
 	always@(posedge clk)
         begin: state_table
@@ -36,25 +41,27 @@ module control(SW, LEDR, KEY);
 			*/
 			4'b0000: begin
 				cur_par_state <= 4'b0001;
-				next <= bird_state_out;
+				//cur_state <= bird_state_out;
 			end
 			4'b0001: begin 
 				cur_par_state <= 4'b0000;
-				next <= wall_state_out;
+				//cur_state <= wall_state_out;
 			end
-			default next <= wall_state_out;
+			//default cur_state <= wall_state_out;
         endcase
         end
 		  
+	 /*
     //state register
     always@(posedge clk)
         begin: state_FFS
-        if (!resetn)
+				if (!resetn)
                         cur_state <= wall_state_out;
         else
                         cur_state <= next;
-        end
+        end*/
 		  
 	assign bird_curr = bird_state_out;
 	assign wall_curr = wall_state_out;
+	assign cur_state_out = cur_par_state == 4'b0000 ? bird_state_out : wall_state_out;
 endmodule
