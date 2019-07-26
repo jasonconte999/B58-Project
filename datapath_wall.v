@@ -10,19 +10,27 @@ module datapath_wall(input clk, input [1:0] cur_state, output [7:0] x_out);
 	
 	localparam 	UPDATE_WALL = 3'd0;
 	
-   // State mapping
-   always @(*)
-   begin
+   	// State mapping
+   	always @(*)
+   	begin
 		case (cur_state)
 			UPDATE_WALL:
 				begin
-					if(wall_x <= 0)
-						wall_x <= WALL_START;
 					wall_x <= wall_x - WALL_X_SPEED;
+					if(wall_x <= 0)//if wall_x is less than or equal to 0 reset its value
+						wall_x <= WALL_START;
 				end
 		endcase
-   end
+  	end
 	
 	assign x_out = wall_x;
+	
+	//need for hole
+	wall_height_generator rg(
+		.clk(clk),
+		.resetn(1'b1),
+		.out(wall_top_hole_y)
+	);
+	
 
 endmodule	
