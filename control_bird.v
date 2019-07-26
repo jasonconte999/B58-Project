@@ -1,6 +1,5 @@
-module control_bird(clk, resetn, flag, press_key, touched, current_out);
+module control_bird(clk, flag, press_key, touched, current_out);
         input clk;
-        input resetn;
         input press_key;
         input touched;
         input flag; // whether bird is too high
