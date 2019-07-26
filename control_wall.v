@@ -24,7 +24,7 @@ module control_wall(go, touched, clk, resetn, current);
             W_STOP: begin
                 //afterDraw = W_READY;
                 //next = W_DRAW;
-		        next = W_READY;
+					if (touched) next = W_READY;
             end
             W_DRAW: next = afterDraw;
             default next = W_READY;
