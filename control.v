@@ -25,11 +25,6 @@ module control(SW, LEDR, KEY);
 		.clk(clk),
 		.resetn(resetn),
 		.current(wall_state_out));
-		
-	
-	//wire [3:0] bird_state_out, wall_state_out;
-	//assign bird_state_out = 4'b1001;
-	//assign wall_state_out = 4'b1011;
 	
 	always@(posedge clk)
         begin: state_table
@@ -50,22 +45,16 @@ module control(SW, LEDR, KEY);
 			default next <= wall_state_out;
         endcase
         end
+		  
     //state register
     always@(posedge clk)
         begin: state_FFS
-                        cur_state <= next;
-        end
-		  
-	assign bird_curr = bird_state_out;
-	assign wall_curr = wall_state_out;
-	
         if (!resetn)
                         cur_state <= wall_state_out;
-                else
+        else
                         cur_state <= next;
         end
 		  
 	assign bird_curr = bird_state_out;
 	assign wall_curr = wall_state_out;
 endmodule
-
