@@ -115,7 +115,19 @@ Week 2:
         Adil: Get started on moving hole
         Jason: Fully test everything (excluding additional things)
         
+Week 3:
         
+        This Week:
+        Yatzu: added draw, delete, update states to control_bird and control_wall, created top level module control, partially tested them
+        Yifei: 
+        Adil: 
+        Jason:
+        
+        Next week plan:
+        Yatzu:
+        Yifei:
+        Adil:
+        Jason:
 
 
 
