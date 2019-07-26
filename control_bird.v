@@ -1,3 +1,4 @@
+
 module control_bird(clk, flag, press_key, touched, current_out);
         input clk;
         input press_key;
@@ -12,32 +13,25 @@ module control_bird(clk, flag, press_key, touched, current_out);
         always@(posedge clk)
         begin: state_table
                 case(current)
-                        /*
-                        B_READY: begin
-                                afterDraw = press_key ? B_START : B_READY;
-                                next = B_DRAW;
-                        end*/
                         B_START: begin
                                 afterDraw <= press_key ? B_RAISING : B_START;
-                                current <= B_DRAW;
+                                current <= B_DEL;
                         end
                         B_RAISING: begin
                                 if (touched) afterDraw <= B_STOP;
                                 else afterDraw  <= flag ? B_FALLING : B_RAISING;
-                                current <= B_DRAW;
+                                current <= B_DEL;
                         end
                         B_FALLING: begin
                                 if (touched) afterDraw <= B_STOP;
                                 else afterDraw  <= press_key ? B_RAISING : B_FALLING;
-                                current <= B_DRAW;
+                                current <= B_DEL;
                         end
                         B_STOP: begin
-                                //afterDraw <= B_START;
-                                //next <= B_DRAW;
-				if (touched) current <= B_START;
+											if (touched) current <= B_START;
                         end
-			B_DEL: current <= B_UPDATE;
-			B_UPDATE: current <= B_DRAW;
+								B_DEL: current <= B_UPDATE;
+								B_UPDATE: current <= B_DRAW;
                         B_DRAW: current <= afterDraw;
                         default current <= B_START;
                 endcase
