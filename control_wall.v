@@ -1,11 +1,10 @@
-module control_wall(go, touched, clk, resetn, current_out);
+module control_wall(go, touched, clk, current_out);
     input go;
     input touched;
     input clk;
-    input resetn;
     output [3:0] current_out;
     
-    localparam W_READY = 4'b0101, W_MOVE = 4'b0110, W_STOP = 4'b0111, W_DRAW = 4'b1000;
+    localparam W_READY = 4'b0101, W_MOVE = 4'b0110, W_STOP = 4'b0111, W_DRAW = 4'b1000, W_DEL = 4'b1001, W_UPDATE = 4'b1010;
     reg [3:0] next, afterDraw, current;
 
     
@@ -26,6 +25,8 @@ module control_wall(go, touched, clk, resetn, current_out);
                 //next = W_DRAW;
 					if (touched) current = W_READY;
             end
+	    W_DEL: current = W_UPDATE;
+	    W_UPDATE: current =  W_DRAW;
             W_DRAW: current = afterDraw;
             default current = W_READY;
         endcase
