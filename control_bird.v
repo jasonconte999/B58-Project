@@ -1,16 +1,16 @@
-module control_bird(clk, resetn, flag, press_key, touched, current);
+module control_bird(clk, resetn, flag, press_key, touched, current_out);
         input clk;
         input resetn;
         input press_key;
         input touched;
         input flag; // whether bird is too high
-        output reg [3:0] current;
+        output [3:0] current_out;
         //current state and next state
-        reg [3:0] next, afterDraw;
+        reg [3:0] next, afterDraw, current;
         
         localparam B_START = 4'b0000, B_RAISING = 4'b0001, B_FALLING = 4'b0010, B_STOP = 4'b0011, B_DRAW = 4'b0100; /*B_READY = 3'b000,*/
         
-        always@(*)
+        always@(posedge clk)
         begin: state_table
                 case(current)
                         /*
@@ -20,27 +20,29 @@ module control_bird(clk, resetn, flag, press_key, touched, current);
                         end*/
                         B_START: begin
                                 afterDraw <= press_key ? B_RAISING : B_START;
-                                next <= B_DRAW;
+                                current <= B_DRAW;
                         end
                         B_RAISING: begin
                                 if (touched) afterDraw <= B_STOP;
                                 else afterDraw  <= flag ? B_FALLING : B_RAISING;
-                                next <= B_DRAW;
+                                current <= B_DRAW;
                         end
                         B_FALLING: begin
                                 if (touched) afterDraw <= B_STOP;
                                 else afterDraw  <= press_key ? B_RAISING : B_FALLING;
-                                next <= B_DRAW;
+                                current <= B_DRAW;
                         end
                         B_STOP: begin
                                 //afterDraw <= B_START;
                                 //next <= B_DRAW;
-				if (touched) next <= B_START;
+									if (touched) current <= B_START;
                         end
-                        B_DRAW: next <= afterDraw;
-                        default next <= B_START;
+                        B_DRAW: current <= afterDraw;
+                        default current <= B_START;
                 endcase
         end
+		  
+		  assign current_out = current;
         
         /*//enable signals
         always@(*)
@@ -55,7 +57,7 @@ module control_bird(clk, resetn, flag, press_key, touched, current);
                 endcase
         end*/
                 
-        
+        /*
         //state register
         always@(posedge clk)
         begin: state_FFS
@@ -63,5 +65,5 @@ module control_bird(clk, resetn, flag, press_key, touched, current);
                         current <= B_START;
                 else
                         current <= next;
-        end
+        end*/
 endmodule
