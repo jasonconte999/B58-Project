@@ -27,10 +27,10 @@ module control_bird(clk, flag, press_key, touched, current_out);
                                 current <= B_DEL;
                         end
                         B_STOP: begin
-											if (touched) current <= B_START;
+				if (touched) current <= B_START;
                         end
-								B_DEL: current <= B_UPDATE;
-								B_UPDATE: current <= B_DRAW;
+			B_DEL: current <= B_UPDATE;
+			B_UPDATE: current <= B_DRAW;
                         B_DRAW: current <= afterDraw;
                         default current <= B_START;
                 endcase
