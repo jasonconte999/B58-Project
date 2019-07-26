@@ -58,7 +58,7 @@ module control(SW, LEDR, KEY);
 		  
 	assign bird_curr = bird_state_out;
 	assign wall_curr = wall_state_out;
-endmodule
+	
         if (!resetn)
                         cur_state <= wall_state_out;
                 else
