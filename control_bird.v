@@ -1,4 +1,3 @@
-
 module control_bird(clk, flag, press_key, touched, current_out);
         input clk;
         input press_key;
