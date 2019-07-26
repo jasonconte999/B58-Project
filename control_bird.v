@@ -35,8 +35,7 @@ module control_bird(clk, flag, press_key, touched, current_out);
                         default current <= B_START;
                 endcase
         end
-		  
-		  assign current_out = current;
+	assign current_out = current;
         
         /*//enable signals
         always@(*)
