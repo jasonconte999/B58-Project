@@ -1,6 +1,5 @@
-module control(clk, resetn, touched, flag, collision, go, cur_state_out, bird_curr, wall_curr);
+module control(clk, touched, flag, collision, go, cur_state_out, bird_curr, wall_curr);
 	input clk;
-	input resetn;
 	input touched;
 	input flag;
 	input collision;
