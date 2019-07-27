@@ -116,18 +116,18 @@ Week 2:
         Jason: Fully test everything (excluding additional things)
         
 Week 3:
-        
+        Debugging issues caused us to overshoot deadlines. We have decided to abandon the additional functionality we had planned to implement. Extra time has been booked in the Makerspace next week to finish the project.
         This Week:
         Yatzu: added draw, delete, update states to control_bird and control_wall, created top level module control, partially tested them
-        Yifei: 
-        Adil: 
-        Jason:
+        Yifei: Worked on creating bird sprite
+        Adil: Partly debugged and implemented data_path wall
+        Jason: Fully debugged datapath, mostly implemented and debugged datapath_bird
         
         Next week plan:
-        Yatzu:
-        Yifei:
-        Adil:
-        Jason:
+        Yatzu: Help debugging and implementing datapath wall
+        Yifei: Help debuggging datapath bird
+        Adil: Finish debugging datapath wall
+        Jason: Finish debugging datapath bird, run and debug entire project together afterwards
 
 
 
