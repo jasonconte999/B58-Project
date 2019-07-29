@@ -24,7 +24,11 @@ module datapath_wall(input clk, input [3:0] cur_state, output [7:0] x_out);
   	end
 	
 	assign x_out = wall_x;
-	
+	/*
+	use this if wall_height_generator does not work
+	reg [7:0] wall_top_hole_y;
+	wall_top_hole_y = {$random} % 100;
+	*/
 	//need for hole
 	wall_height_generator rg(
 		.clk(clk),
