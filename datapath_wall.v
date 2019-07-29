@@ -1,4 +1,4 @@
-module datapath_wall(input clk, input [1:0] cur_state, output [7:0] x_out);
+module datapath_wall(input clk, input [3:0] cur_state, output [7:0] x_out);
 	
 	localparam WALL_X_SPEED = 8'b00000100;//Speed of wall is 4
 	localparam WALL_HEIGHT = 8'b01111000;//height of wall is 120
