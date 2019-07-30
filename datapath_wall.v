@@ -48,7 +48,7 @@ module datapath_wall(input clk, input [3:0] cur_state, output [7:0] x_out, outpu
 	//need for hole
 	wall_height_generator rg(
 		.clk(clk),
-		.resetn(1'b1),//cur_state == 4'b0000),
+		//.resetn(1'b1),//cur_state == 4'b0000),
 		.out(wall_top_hole_y)
 	);
 	
