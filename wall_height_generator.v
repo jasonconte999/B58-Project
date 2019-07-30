@@ -1,3 +1,30 @@
+/*module whg(HEX0, HEX1, SW, KEY, LEDR);
+    input [1:0] SW;
+    input [3:0] KEY;
+	 output [7:0] LEDR;
+    //input CLOCK_50;
+    output [6:0] HEX0, HEX1;
+    wire [7:0] r;
+	 
+    wall_height_generator2 whg(
+	    .clk(KEY[2]),
+	    .out(r)
+	    );
+	
+	assign LEDR[7:0] = r;
+		 
+    hex_display h0(
+	    .IN(r[3:0]), 
+	    .OUT(HEX0)
+	    );
+		 
+    hex_display h1(
+	    .IN(r[7:4]), 
+	    .OUT(HEX1)
+	    );
+endmodule
+*/
+
 // use a linear feedback shift register to generate nearly random numbers
 // the output then be used to determine the height of the wall in game
 module wall_height_generator(clk, out);
