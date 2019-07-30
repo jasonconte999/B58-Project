@@ -6,7 +6,7 @@
     output [6:0] HEX0, HEX1;
     wire [7:0] r;
 	 
-    wall_height_generator2 whg(
+    wall_height_generator whg(
 	    .clk(KEY[2]),
 	    .out(r)
 	    );
