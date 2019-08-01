@@ -7,5 +7,5 @@ module check_touched(
 	assign in_the_hole = (bird_xright >= wall_xleft) && (bird_xleft <= wall_xright);
 	// check y coordinate: top and bottom positions of bird and wall
 	assign touched_top_bottom  = (bird_ytop <= wall_topy) || (bird_ybottom >= wall_bottomy);
-	touched = in_the_hole && touched_top_bottom;
+	assign touched = in_the_hole && touched_top_bottom;
 endmodule

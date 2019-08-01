@@ -1,7 +1,7 @@
 `timescale 1ns / 1ns // `timescale time_unit/time_precision
 
-module RateDivider(d, clock, Clear_b, ParLoad, Enable, pulse);
-	input [27:0] d;
+module RateDivider(d, r, clock, Clear_b, ParLoad, Enable, pulse);
+	input [27:0] d, r;
 	input clock;
 	input Clear_b;
 	input ParLoad;
@@ -18,5 +18,5 @@ module RateDivider(d, clock, Clear_b, ParLoad, Enable, pulse);
 		q <= q - 1'b1; // increment q
 		// q <= q - 1'b1; // alternatively, decrement q
 	end
-	assign pulse = (q == 28'b0000000000000000000000000000) ? 1 : 0;
+	assign pulse = (q < r) ? 1 : 0;
 endmodule

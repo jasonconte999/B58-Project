@@ -15,7 +15,7 @@ module draw_rect(
 
 	always @(posedge clk)
 	begin
-		if (enable == 1'b1)
+		if (enable == 1'b1 && !finished_draw_reg)
 		begin
 			if (draw_x < width - 1)
 				draw_x = draw_x + 1;
@@ -27,7 +27,7 @@ module draw_rect(
 			else
 				finished_draw_reg = 1'b1;
 		end
-		else
+		else if (enable == 1'b0)
 		begin
 			draw_x = 8'b00000000;
 			draw_y = 8'b00000000;
